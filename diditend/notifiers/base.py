@@ -1,5 +1,6 @@
 import json
 import os
+from .manager import Manager
 
 class Notifier():
 
@@ -14,6 +15,7 @@ class Notifier():
             self.save_config()
 
         self.create_needed_config_entries()
+        Manager.register(self.__class__.__name__)
 
     def create_config(self, cfg_str):
         if not cfg_str in self.config[self.__class__.__name__].keys():

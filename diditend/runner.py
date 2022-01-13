@@ -1,4 +1,5 @@
 from .notifiers.telegram import TelegramNotifier 
+from .notifiers.manager import Manager
 from .parser import Parser 
 import datetime
 
@@ -11,6 +12,11 @@ def main():
         service = "Telegram"
     else:
         service = parser.args.service
+
+    if parser.args.command is not None:
+        if parser.args.command == "list":
+            print("The following notifiers are available: {}.".format(" ".join(Manager.__NOTIFIERS)))
+
 
     if parser.args.message is None:
         message = "Your terminal job has finished! Current time: {}".format(datetime.datetime.now())
