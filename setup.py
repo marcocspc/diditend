@@ -9,7 +9,7 @@ setup(
     entry_points = {
         "console_scripts": ['diditend=diditend.runner:main']
         },
-    version = "0.0.1",
+    version = "0.0.2",
     description = "Command line utility to notify me (or you) when a process has finished on command line.",
     long_description = "Command line utility to notify me (or you) when a process has finished on command line.",
     author = "marcocspc",
