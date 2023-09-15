@@ -22,10 +22,7 @@ class Notifier():
 
     def get_config(self, cfg_str):
         if not cfg_str in self.config[self.__class__.__name__].keys():
-            raise KeyError("Config {} not set in {}.".format(cfg_str, self.config_file_path))
-
-        if self.config[self.__class__.__name__][cfg_str] == "":
-            raise KeyError("Config {} is empty in {}.".format(cfg_str, self.config_file_path))
+            self.create_config(cfg_str)
 
         return self.config[self.__class__.__name__][cfg_str]
 
@@ -34,6 +31,11 @@ class Notifier():
 
     def save_config(self):
         with open(self.config_file_path, 'w+') as cfg_json:
-            json.dump(self.config, cfg_json)
+            json.dump(self.config, cfg_json, indent=4)
             cfg_json.close()
 
+    def set_config(self, entry, value):
+        self.config[self.__class__.__name__][entry] = value
+
+    def get_config_entries(self):
+        return self.config[self.__class__.__name__]

@@ -1,5 +1,6 @@
 from .notifiers.manager import Manager
 from .parser import Parser 
+from .util.prompt import Functions
 import datetime
 
 def main():
@@ -11,7 +12,13 @@ def main():
 
     if parser.args.command is not None:
         if parser.args.command == "list":
-            print("The following notifiers are available: {}.".format(" ".join(Manager.NOTIFIERS)))
+            lst = [notifr["class"] for notifr in Manager.NOTIFIERS]
+            print("The following notifiers are available: {}.".format(" ".join(lst)))
+            exit(0)
+
+        if parser.args.command == "mkconfig":
+            Functions.create_config_prompt()
+            exit(0)
 
     if parser.args.message is None:
         message = "Your terminal job has finished! Current time: {}".format(datetime.datetime.now())
@@ -24,3 +31,6 @@ def main():
     if service == "Telegram":
         notifier = TelegramNotifier()
         notifier.send_message(message)
+        exit(0)
+
+    parser.parser.print_help()

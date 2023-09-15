@@ -4,5 +4,5 @@ import inspect
 class Manager:
 
     NOTIFIERS = [
-            "TelegramNotifier",
+            {"filename": "telegram.py", "class" :"TelegramNotifier"},
             ]
