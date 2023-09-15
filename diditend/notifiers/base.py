@@ -1,6 +1,5 @@
 import json
 import os
-from .manager import Manager
 
 class Notifier():
 
@@ -15,7 +14,6 @@ class Notifier():
             self.save_config()
 
         self.create_needed_config_entries()
-        Manager.register(self.__class__.__name__)
 
     def create_config(self, cfg_str):
         if not cfg_str in self.config[self.__class__.__name__].keys():
@@ -23,11 +21,13 @@ class Notifier():
             self.save_config()
 
     def get_config(self, cfg_str):
-        if not cfg_str in self.config[self.__class__.__name__].keys() or self.config[self.__class__.__name__][cfg_str] == "":
-            raise KeyError("Config " + cfg_str + " not set in config file.")
-        else:
-            return self.config[self.__class__.__name__][cfg_str]
-        return 
+        if not cfg_str in self.config[self.__class__.__name__].keys():
+            raise KeyError("Config {} not set in {}.".format(cfg_str, self.config_file_path))
+
+        if self.config[self.__class__.__name__][cfg_str] == "":
+            raise KeyError("Config {} is empty in {}.".format(cfg_str, self.config_file_path))
+
+        return self.config[self.__class__.__name__][cfg_str]
 
     def send_message(self, message):
         self.send_to_my_service(message)
