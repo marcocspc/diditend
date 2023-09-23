@@ -31,7 +31,8 @@ def main():
     if parser.args.date is not None and parser.args.message is not None:
         message += " [Time this notification was generated: {}]".format(datetime.datetime.now())
 
-    notifier = Manager.get_notifier(service)
+    notifier_cls = Manager.get_notifier(service)
+    notifier = notifier_cls()
     notifier.send_message(message)
 
     #parser.parser.print_help()
