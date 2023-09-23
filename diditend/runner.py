@@ -26,11 +26,11 @@ def main():
         message = parser.args.message
 
     if parser.args.date is not None and parser.args.message is not None:
-        message += " [Time this notification was generated: {}]".format(datetime.datjtime.now())
+        message += " [Time this notification was generated: {}]".format(datetime.datetime.now())
 
     if service == "Telegram":
         notifier = TelegramNotifier()
         notifier.send_message(message)
         exit(0)
 
-    parser.parser.print_help()
+    #parser.parser.print_help()
