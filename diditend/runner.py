@@ -8,7 +8,10 @@ def main():
     service = None 
     message = None 
 
-    service = parser.args.service
+    if parser.args.service is None:
+        service = "Telegram"
+    else:
+        service = parser.args.service
 
     if parser.args.command is not None:
         if parser.args.command == "list":
