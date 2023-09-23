@@ -9,7 +9,7 @@ def main():
     message = None 
 
     if parser.args.service is None:
-        service = "Telegram"
+        service = "TelegramNotifier"
     else:
         service = parser.args.service
 
@@ -31,9 +31,7 @@ def main():
     if parser.args.date is not None and parser.args.message is not None:
         message += " [Time this notification was generated: {}]".format(datetime.datetime.now())
 
-    if service == "Telegram":
-        notifier = TelegramNotifier()
-        notifier.send_message(message)
-        exit(0)
+    notifier = Manager.get_notifier(service)
+    notifier.send_message(message)
 
     #parser.parser.print_help()

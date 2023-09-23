@@ -1,6 +1,4 @@
 import importlib
-import sys
-import inspect
 from ..notifiers.manager import Manager
 
 class Functions():
